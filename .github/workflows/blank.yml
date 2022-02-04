@@ -29,14 +29,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      # Clone vyos/vyos-build
-      - run: sudo git clone -b equuleus --single-branch https://github.com/vyos/vyos-build /vyos
+      - uses: actions/checkout@v2
+        with:
+          repository: vyos/vyos-build
+          ref: equuleus
+          path: vyos
         
       - name: Build
         run: |
-          cd /vyos
-          chmod +x $GITHUB_WORKSPACE/build.sh
-          sudo $GITHUB_WORKSPACE/build.sh
+          cd vyos
+          ./configure --architecture amd64 --build-type release --version 1.3.0
+          sudo make iso
           
       - uses: actions/upload-artifact@v2
         with:
