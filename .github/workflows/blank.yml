@@ -31,12 +31,10 @@ jobs:
       
       # Clone vyos/vyos-build
       - run: sudo git clone -b equuleus --single-branch https://github.com/vyos/vyos-build /vyos
-
-      - name: Switch to vyos work dir
-        run: cd /vyos
         
       - name: Build
         run: |
+          cd /vyos
           chmod +x $GITHUB_WORKSPACE/build.sh
           sudo $GITHUB_WORKSPACE/build.sh
           
