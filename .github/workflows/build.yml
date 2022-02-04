@@ -1,0 +1,39 @@
+name: Build VyOS
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: vyos/vyos-build:equuleus
+      options: --privileged
+
+    steps:
+      - name: Close this repo
+        uses: actions/checkout@v2
+
+      - name: Clone vyos/vyos-build
+        uses: actions/checkout@v2
+        with:
+          repository: vyos/vyos-build
+          ref: equuleus
+          path: vyos
+
+      # https://docs.vyos.io/en/latest/contributing/build-vyos.html#build-iso
+      # https://tech-mmmm.blogspot.com/2020/05/vyos-12xiso.html
+      - name: Build
+        run: |
+          cd vyos
+          ./configure --architecture amd64 --build-type release --version 1.3.0
+          sudo make iso
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Artifact
+          path: vyos/build/vyos-*.iso
