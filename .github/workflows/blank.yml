@@ -28,9 +28,25 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          path: /scr
+      
+      # Clone vyos/vyos-build
+      - uses: actions/checkout@v2
+        with: 
+          repository: vyos/vyos-build
+          ref: equuleus
+          path: /vyos
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Switch to vyos work dir
+        run: cd /vyos
+        
+      - name: Build
         run: |
-          chmod +x build.sh
-          sudo ./build.sh
+          chmod +x /scr/build.sh
+          sudo /scr/build.sh
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Artifact
+          path: /vyos/build
