@@ -13,8 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Container Settings
+    # See: https://docs.vyos.io/en/latest/contributing/build-vyos.html#dockerhub
     container:
-      image: vyos/vyos-build:${{ env.VYOS_DEV_CODE }}
+      image: vyos/vyos-build:equuleus
       options: --privileged
 
     steps:
