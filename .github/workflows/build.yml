@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Close this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Clone vyos/vyos-build
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: vyos/vyos-build
           ref: ${{ env.VYOS_DEV_CODE }}
@@ -39,7 +39,7 @@ jobs:
           sudo make iso
 
       # Upload artifact
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Artifact-${{ env.VYOS_VERSION }}
           path: vyos/build/vyos-*.iso
