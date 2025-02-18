@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 
 env:
+  # You also HAVE TO change container image version.
   VYOS_DEV_CODE: 'sagitta'
   VYOS_VERSION: '1.4.1'
 
@@ -15,7 +16,7 @@ jobs:
     # Container Settings
     # See: https://docs.vyos.io/en/latest/contributing/build-vyos.html#dockerhub
     container:
-      image: vyos/vyos-build:${{ env.VYOS_DEV_CODE }}
+      image: vyos/vyos-build:sagitta
       options: --privileged
 
     steps:
