@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: |
           cd vyos
-          ./build-vyos-image --architecture amd64 --build-type release --version $VYOS_VERSION generic
+          ./build-vyos-image --architecture amd64 --build-type release --version $VYOS_VERSION iso
 
       # Upload artifact
       - uses: actions/upload-artifact@v4
