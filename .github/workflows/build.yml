@@ -15,15 +15,15 @@ jobs:
     # Container Settings
     # See: https://docs.vyos.io/en/latest/contributing/build-vyos.html#dockerhub
     container:
-      image: vyos/vyos-build:equuleus
+      image: vyos/vyos-build:${{ env.VYOS_DEV_CODE }}
       options: --privileged
 
     steps:
       - name: Close this repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Clone vyos/vyos-build
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: vyos/vyos-build
           ref: ${{ env.VYOS_DEV_CODE }}
@@ -38,7 +38,7 @@ jobs:
           sudo make iso
 
       # Upload artifact
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Artifact-${{ env.VYOS_VERSION }}
           path: vyos/build/vyos-*.iso
