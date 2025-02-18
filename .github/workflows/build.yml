@@ -2,12 +2,11 @@ name: Build VyOS
 
 on:
   push:
-    branches: [master]
   workflow_dispatch:
 
 env:
-  VYOS_DEV_CODE: 'equuleus'
-  VYOS_VERSION: '1.3.2'
+  VYOS_DEV_CODE: 'sagitta'
+  VYOS_VERSION: '1.4.1'
 
 jobs:
   build:
