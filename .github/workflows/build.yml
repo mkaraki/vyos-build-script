@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: |
           cd vyos
-          ./configure --architecture amd64 --build-type release --version $VYOS_VERSION
+          ./build-vyos-image --architecture amd64 --build-type release --version $VYOS_VERSION
           sudo make iso
 
       # Upload artifact
